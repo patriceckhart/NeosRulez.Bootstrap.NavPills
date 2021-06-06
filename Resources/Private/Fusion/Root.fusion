@@ -1,0 +1,57 @@
+prototype(NeosRulez.Bootstrap.NavPills:Content.NavPills) < prototype(Neos.Neos:ContentComponent) {
+    children = ${q(node).children('[instanceof NeosRulez.Bootstrap.NavPills:Content.NavPill]').sort('_index', 'ASC').filter('[_hiddenInIndex=false]').get()}
+
+    navPills = Neos.Neos:ContentCollection {
+        @context.node = ${node}
+        attributes {
+            class = 'tab-content w-100'
+            id = ${'tabcontent__' + node.identifier}
+        }
+    }
+
+    wrapperClass = ${node.properties.layout == 'horizontal' ? false : 'layout-vertical d-flex align-items-start'}
+    navClass = ${node.properties.layout == 'horizontal' ? 'nav ' : 'nav flex-column me-3 '}
+    divClass = ${node.properties.style == 'pill' ? this.navClass + 'nav-pills' : (node.properties.layout == 'vertical' ? this.navClass + 'nav-pills' : this.navClass + 'nav-tabs')}
+    ariaOrientation = ${node.properties.layout == 'horizontal' ? false : 'vertical'}
+
+    renderer = afx`
+        <NeosRulez.Bootstrap:Component.AbstractContent>
+            <div class={props.wrapperClass} >
+                <nav @if.render={props.children}>
+                    <div class={props.divClass} id="nav-tab" role="tablist" aria-orientation={props.ariaOrientation} >
+                        <Neos.Fusion:Loop items={props.children} itemName="item" iterationName="navPillIterator" >
+                            <button class={'nav-link' + (navPillIterator.isFirst ? ' active' : '')} id={'navpill__' + item.identifier + '__tab'} data-bs-toggle="tab" data-bs-target={'#navpill__' + item.identifier} type="button" role="tab" aria-controls={'navpill__' + item.identifier} aria-selected="false">
+                                {item.properties.title ? item.properties.title : item.identifier}
+                            </button>
+                        </Neos.Fusion:Loop>
+                    </div>
+                </nav>
+                {props.navPills}
+            </div>
+        </NeosRulez.Bootstrap:Component.AbstractContent>
+    `
+    renderer.@process.contentElementWrapping = Neos.Neos:ContentElementWrapping {
+        node = ${documentNode}
+    }
+    @cache {
+        mode = 'cached'
+        entryIdentifier {
+            node = ${node}
+        }
+        entryTags {
+            1 = ${Neos.Caching.nodeTypeTag('NeosRulez.Bootstrap.NavPills:Content.NavPills', node)}
+            2 = ${Neos.Caching.nodeTypeTag('NeosRulez.Bootstrap.NavPills:Content.NavPill', node)}
+        }
+    }
+}
+
+prototype(NeosRulez.Bootstrap.NavPills:Content.NavPill) < prototype(Neos.Neos:ContentCollection) {
+    @context.node = ${node}
+    attributes {
+        hasPrev = ${Array.length(q(node).prev())}
+        class = ${'tab-pane fade' + (!this.hasPrev ? ' show active' : '')}
+        id = ${'navpill__' + node.identifier}
+        role = 'tabpanel'
+        aria-labelledby = 'nav-profile-tab'
+    }
+}

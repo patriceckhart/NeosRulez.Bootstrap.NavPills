@@ -1,0 +1,10 @@
+Neos:
+  Neos:
+    userInterface:
+      translation:
+        autoInclude:
+          NeosRulez.Bootstrap.NavPills:
+            - 'NodeTypes/Content/*'
+    fusion:
+      autoInclude:
+        NeosRulez.Bootstrap.NavPills: true
