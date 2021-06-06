@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="" product-name="NeosRulez.Bootstrap.NavPills" source-language="en" datatype="plaintext">
+        <body>
+            <trans-unit id="ui.label" xml:space="preserve">
+				<source>Navbar pills</source>
+			</trans-unit>
+            <trans-unit id="properties.layout" xml:space="preserve">
+                <source>Layout</source>
+            </trans-unit>
+            <trans-unit id="properties.style" xml:space="preserve">
+                <source>View</source>
+            </trans-unit>
+            <trans-unit id="properties.layout.selectBoxEditor.values.horizontal" xml:space="preserve">
+                <source>Horizontal</source>
+            </trans-unit>
+            <trans-unit id="properties.layout.selectBoxEditor.values.vertical" xml:space="preserve">
+                <source>Vertical</source>
+            </trans-unit>
+            <trans-unit id="properties.style.selectBoxEditor.values.tab" xml:space="preserve">
+                <source>Tab</source>
+            </trans-unit>
+            <trans-unit id="properties.style.selectBoxEditor.values.pill" xml:space="preserve">
+                <source>Pill</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
